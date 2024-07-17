@@ -1,0 +1,63 @@
+version: '3.9'
+services:
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: tima12345
+      POSTGRES_DB: shop
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - backendnetwork
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend/shop/shop
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    volumes:
+      - static_volume:/app/static
+      - static_media:/app/media
+    networks:
+      - backendnetwork
+      - frontendnetwork
+
+
+  frontend:    
+    build: 
+      context: .
+      dockerfile: frontend/shop/Dockerfile
+    container_name: frontend
+    links:
+      - backend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+    volumes:
+      - static_volume:/static
+      - static_media:/media
+    networks:
+      - frontendnetwork
+      - backendnetwork
+
+  
+
+volumes:
+  static_volume:
+  static_media:  
+  pgdata:
+
+networks:
+  frontendnetwork:
+  backendnetwork:
+
