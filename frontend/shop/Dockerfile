@@ -15,3 +15,5 @@ RUN npm run build
 FROM nginx:alpine
 COPY ../../nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist/shop/browser /usr/share/nginx/html
+COPY frontend/shop/ssl/server.key /etc/nginx/certs/server.key
+COPY frontend/shop/ssl/server.crt /etc/nginx/certs/server.crt

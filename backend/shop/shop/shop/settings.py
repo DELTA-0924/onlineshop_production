@@ -28,7 +28,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL=True
-CSRF_TRUSTED_ORIGINS = ["http://localhost:4200"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:4200","https://onlineshop.com"]
 
 # Application references
 
@@ -147,4 +147,4 @@ STATIC_ROOT =os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
 
 # URL ��� ������������ ����������� ������������
-MEDIA_URL = 'http://localhost:4200/media/'
+MEDIA_URL = 'https://localhost:443/media/'
