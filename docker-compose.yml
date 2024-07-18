@@ -50,7 +50,15 @@ services:
       - frontendnetwork
       - backendnetwork
 
-  
+  https-portal:
+    image: steveltn/https-portal:1
+    ports: 
+      -"443:443"
+    links:
+      frontend
+    restart: always
+    environment:
+      DOMAINS: 'onlineshop.com->http://frontend:4200'
 
 volumes:
   static_volume:
