@@ -112,28 +112,30 @@ export class AppComponent implements OnInit{
   handlItemClick(item:string,index:number){
     this.lastScrollPosition=0;
     this.threshold=-300
-    this.productList=new Array();
+ 
     this.page=1;
     if(this.currentProductType==item)
-        return ;     
-    this.isBlinking = true;
-    this.isBlinkingIndex = index;
-    this.endOfList=false
-    this.isLoading=true;
-    // Выключаем мигание через 1 секунду
-    window.scrollTo(0, 0)
-    setTimeout(() => {
-      this.isBlinkingIndex = null;
-      this.isBlinking = false;
-    }, 750);
-    //console.log(item)
-    this.currentProductType=item;
-    if(this.search==false || this.carrentquery==''){
-    this.normalGet();
-      }else{
-        this.searchProducts(this.carrentquery);
-      }
-      //  console.log(this.productList)
+             return;
+    this.productList=new Array();
+            this.isBlinking = true;
+            this.isBlinkingIndex = index;
+            this.endOfList=false
+            this.isLoading=true;
+            // Выключаем мигание через 1 секунду
+            window.scrollTo(0, 0)
+            setTimeout(() => {
+              this.isBlinkingIndex = null;
+              this.isBlinking = false;
+            }, 750);
+            //console.log(item)
+            this.currentProductType=item;
+            if(this.search==false || this.carrentquery==''){
+            this.normalGet();
+              }else{
+                this.searchProducts(this.carrentquery);
+              }
+                //console.log(this.productList)
+    
   }
 
   normalGet(){
