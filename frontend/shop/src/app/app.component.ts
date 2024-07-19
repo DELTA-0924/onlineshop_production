@@ -112,10 +112,11 @@ export class AppComponent implements OnInit{
   handlItemClick(item:string,index:number){
     this.lastScrollPosition=0;
     this.threshold=-300
-    this.productList=new Array();
+    
     this.page=1;
     if(this.currentProductType==item)
         return ;     
+    this.productList=new Array();
     this.isBlinking = true;
     this.isBlinkingIndex = index;
     this.endOfList=false
