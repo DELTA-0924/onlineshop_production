@@ -63,6 +63,7 @@ export class AppComponent implements OnInit{
         this.isLoading=false      
         if(!this.flag)  
             this.page=1;
+      this.countpages=data.next;
       });
       this.service.getCategory().subscribe((data:any)=>{
         this.itemTypeList.push({id:1,name:"Главная"},...data.results||[])
