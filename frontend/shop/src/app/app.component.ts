@@ -38,7 +38,7 @@ export class AppComponent implements OnInit{
   selectProduct=false;
   search=false
   carrentquery:string
-  countpages=1;
+  countpages=1
   constructor(private service:ProductService){}
 
   ngOnInit(): void {
@@ -63,6 +63,7 @@ export class AppComponent implements OnInit{
         this.isLoading=false      
         if(!this.flag)  
             this.page=1;
+      this.countpages=data.next;
       });
       this.service.getCategory().subscribe((data:any)=>{
         this.itemTypeList.push({id:1,name:"Главная"},...data.results||[])
@@ -113,29 +114,30 @@ export class AppComponent implements OnInit{
   handlItemClick(item:string,index:number){
     this.lastScrollPosition=0;
     this.threshold=-300
-    this.countpages=1
+    this.countpages=1;
     this.page=1;
     if(this.currentProductType==item)
-        return ;     
+             return;
     this.productList=new Array();
-    this.isBlinking = true;
-    this.isBlinkingIndex = index;
-    this.endOfList=false
-    this.isLoading=true;
-    // Выключаем мигание через 1 секунду
-    window.scrollTo(0, 0)
-    setTimeout(() => {
-      this.isBlinkingIndex = null;
-      this.isBlinking = false;
-    }, 750);
-    //console.log(item)
-    this.currentProductType=item;
-    if(this.search==false || this.carrentquery==''){
-    this.normalGet();
-      }else{
-        this.searchProducts(this.carrentquery);
-      }
-      //  console.log(this.productList)
+            this.isBlinking = true;
+            this.isBlinkingIndex = index;
+            this.endOfList=false
+            this.isLoading=true;
+            // Выключаем мигание через 1 секунду
+            window.scrollTo(0, 0)
+            setTimeout(() => {
+              this.isBlinkingIndex = null;
+              this.isBlinking = false;
+            }, 750);
+            //console.log(item)
+            this.currentProductType=item;
+            if(this.search==false || this.carrentquery==''){
+            this.normalGet();
+              }else{
+                this.searchProducts(this.carrentquery);
+              }
+                //console.log(this.productList)
+    
   }
 
   normalGet(){
@@ -145,8 +147,7 @@ export class AppComponent implements OnInit{
       (data: any) => {
         let list=data.results||[]
         this.countpages=data.next;
-        
-        //console.log(data)
+      // console.log(list)
         if (list.length > 0) {
           this.productList.push(...data.results);
           this.page++;
@@ -168,16 +169,14 @@ export class AppComponent implements OnInit{
   }
   searchGet(){
   //console.log("search")
-    if(this.page>this.countpages)
-      return 
+  if(this.countpages==null)
+    return 
     return this.service.searchProducts(this.carrentquery,this.currentProductType,this.page, this.pageSize).subscribe(
       (data: any) => {
-        
         let list=data.results||[]
-        this.countpages=data.count;
+        this.countpages=data.next;
       // console.log(list)
         if (list.length > 0) {
-          
           this.productList.push(...data.results);
           this.page++;
           this.loading=true
