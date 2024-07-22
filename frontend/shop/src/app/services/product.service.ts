@@ -16,17 +16,7 @@ export class ProductService {
     if (category==="Главная")
       category="Main"
     let params=new HttpParams().append("category",category).append("page",page.toString()).append("page_size",pageSize.toString());
-    return this.http.get<any>(`${this.url}/category/`,{params:params}).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 404) {
-          // Return an empty array if 404 error occurs
-          return of([]);
-        } else {
-          // Handle other HTTP errors if needed
-          throw error;
-        }
-      })
-    );;
+    return this.http.get<any>(`${this.url}/category/`,{params:params});
   }
   getCategory():Observable<any>{
     return this.http.get<any>(`${this.url}/categories/`);

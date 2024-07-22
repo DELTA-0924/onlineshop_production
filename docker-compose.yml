@@ -40,6 +40,7 @@ services:
     links:
       - backend
     ports:
+      - "80:80"
       - "4200:4200"
     depends_on:
       - backend

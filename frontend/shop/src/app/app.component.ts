@@ -38,6 +38,7 @@ export class AppComponent implements OnInit{
   selectProduct=false;
   search=false
   carrentquery:string
+  countpages=1;
   constructor(private service:ProductService){}
 
   ngOnInit(): void {
@@ -112,7 +113,7 @@ export class AppComponent implements OnInit{
   handlItemClick(item:string,index:number){
     this.lastScrollPosition=0;
     this.threshold=-300
-    
+    this.countpages=1
     this.page=1;
     if(this.currentProductType==item)
         return ;     
@@ -138,10 +139,14 @@ export class AppComponent implements OnInit{
   }
 
   normalGet(){
+    if(this.countpages==null)
+      return 
     return this.service.getByCategory(this.currentProductType,this.page, this.pageSize).subscribe(
       (data: any) => {
         let list=data.results||[]
-      // console.log(list)
+        this.countpages=data.next;
+        
+        //console.log(data)
         if (list.length > 0) {
           this.productList.push(...data.results);
           this.page++;
@@ -163,11 +168,16 @@ export class AppComponent implements OnInit{
   }
   searchGet(){
   //console.log("search")
+    if(this.page>this.countpages)
+      return 
     return this.service.searchProducts(this.carrentquery,this.currentProductType,this.page, this.pageSize).subscribe(
       (data: any) => {
+        
         let list=data.results||[]
+        this.countpages=data.count;
       // console.log(list)
         if (list.length > 0) {
+          
           this.productList.push(...data.results);
           this.page++;
           this.loading=true
