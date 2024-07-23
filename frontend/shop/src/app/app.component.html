@@ -6,9 +6,10 @@
 
     
       <div class="text-3xl text-white font-bold "><h1 >SWEATERPI</h1></div>
-      <a href="https://www.sweaterpi.com/#/home" class="bg-white hover:bg-red-500 text-gray-500 hover:text-gray-600  font-bold py-2 px-2  rounded-full">
-        <p class="border-b-[2px] border-gray-400">Перейти на сайт</p>
-      </a>    
+      <a href="https://www.sweaterpi.com/#/home" class="bg-white hover:bg-red-500 text-gray-500 hover:text-gray-600 font-bold py-2 px-4 rounded-full xs:text-sm xs:py-1 xs:px-2">
+        <p class="border-b-2 border-gray-400 xs:text-sm">Перейти на сайт</p>
+      </a>
+        
     </div>
  
   </div>
@@ -26,7 +27,7 @@
     </div>
   </div>
     <div *ngIf="!selectProduct" class="mt-[235px]">
-      <div class="flex justify-center flex-wrap gap-1 relative h-[70vh] text-white " *ngIf="loading"  (scroll)="onScroll($event)">
+      <div class="flex justify-center flex-wrap gap-1 relative  text-white " *ngIf="loading"  (scroll)="onScroll($event)">
         <app-product *ngFor="let product of productList" [product]="product"  [product]="product" (productOutput)="receiveProductFromChild($event)"></app-product>
         <p *ngIf="productList.length === 0">Нет товаров</p>
       </div>
@@ -34,7 +35,7 @@
         <p *ngIf="!loading">Загрузка...</p>
       </div>
     </div>
-    <div class="mt-[170px]">
+    <div class="mt-[170px] ">
     <app-product-detail  *ngIf="selectProduct" [product]="selectedProduct" (detailOutput)="receiveProductFromChild1($event)"></app-product-detail>
   </div>
 </div>

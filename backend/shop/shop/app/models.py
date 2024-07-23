@@ -9,7 +9,7 @@ class ProductCategory(models.Model):
 class Product(models.Model):    
     id=models.BigAutoField(primary_key=True)
     title=models.CharField(max_length=60)
-    description=models.TextField(max_length=120)
+    description=models.TextField(max_length=600)
     size=models.CharField(max_length=60)
     color=models.CharField(max_length=60)
     category=models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
