@@ -6,6 +6,9 @@ class ProductCategory(models.Model):
     name = models.CharField(max_length=50, unique=True)
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name='Category'
+        verbose_name_plural = 'Categories'
 class Product(models.Model):    
     id=models.BigAutoField(primary_key=True)
     title=models.CharField(max_length=60)
