@@ -16,7 +16,7 @@ class Product(models.Model):
     size=models.CharField(max_length=60)
     color=models.CharField(max_length=60)
     category=models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
-    price=models.CharField(max_length=10)
+    price=models.CharField(max_length=60)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
     class Meta:
         unique_together = [['title', 'color']]  
