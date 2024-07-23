@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output, output } from '@angular/core';
 import { Product } from '../../common/Product';
 import { CommonModule } from '@angular/common';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { ProductImageComponent } from '../image/image.component';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ProductImageComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
