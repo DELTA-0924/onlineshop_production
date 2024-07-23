@@ -1,15 +1,15 @@
 
-<div class="  bg-transparent  w-[100vw]  rounded-lg overflow-hidden flex justify-center">
+<div class=" bg-blue-950 w-[95vw]  rounded-lg h-full overflow-hidden flex justify-center shadow-black shadow-lg ">
     
-    <div class="p-4  rounded-lg shadow-lg">
+    <div class="p-4  rounded-lg shadow-lg text-white">
         <div class="flex justify-center">
-            <img src="{{ product.image }}" class="rounded-lg w-[400px] h-[350px] border-slate-800 border-x-[50px] mb-4 xs2:border-x-[10px] xs1:h-[300px]">
+            <img src="{{ product.image }}" class="rounded-lg w-[90vw] h-[350px] border-gray-600 border-x-[150px] mb-4 xs2:border-x-[10px] xs1:h-[300px]">
         </div>
         <h2 class="text-xl font-semibold mb-2 border-b-[1px] border-gray-300">{{ product.title }}</h2>
-        <div class="mb-4">
+        <div class="mb-4 w-[90vw]">
             <h3 class="text-lg font-medium mb-2 border-b-[1px] border-gray-300 bg-opacity-5">Описание:</h3>
-            <div class="border-[1px] rounded-lg p-1">
-            <p class="text-gray-700  " >{{ product.description }}</p>
+            <div class="border-[1px] rounded-lg p-1  ">
+            <p class="text-gray-100 break-words " >{{ product.description }}</p>
         </div>
         </div>
         <div class="mb-4">
@@ -17,12 +17,12 @@
             <div class="grid grid-cols-2 gap-2">
                 <div><span class="font-medium">Размер:</span> {{ product.size }}</div>
                 <div><span class="font-medium">Цвет:</span> {{ product.color }}</div>
-                <div><span class="font-medium">Цена:</span> {{ product.price }} руб</div>
+                <div><span class="font-medium">Цена:</span> {{ product.price }}</div>
             </div>
         </div>
     </div>
     <div >
-    <svg xmlns="http://www.w3.org/2000/svg" class="fixed top-[25%] right-0 h-[50px] w-[50px] inline-block align-middle xs2:w-[30px]" viewBox="0 0 20 20" fill="currentColor" (click)="closeDetail()">
+    <svg xmlns="http://www.w3.org/2000/svg" class="fixed top-[18%] right-[2%] h-[50px] w-[50px] inline-block align-middle xs2:w-[30px] bg-white opacity-50 rounded-lg " viewBox="0 0 20 20" fill="currentColor" (click)="closeDetail()">
         <path fill-rule="evenodd" d="M3.293 8.293a1 1 0 0 1 1.414 0L10 13.586l5.293-5.293a1 1 0 1 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414z" clip-rule="evenodd" />
       </svg>
     </div>
