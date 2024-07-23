@@ -9,7 +9,7 @@ import { Component, Input, ElementRef, AfterViewInit, Renderer2 } from '@angular
 })
 export class ProductImageComponent implements AfterViewInit {
   @Input() imageUrl: string;
-
+  imagewidth=350;
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
@@ -18,12 +18,13 @@ export class ProductImageComponent implements AfterViewInit {
     let heigth=350
     if(img.height<350)
       heigth=img.height;
+    if(img.width<350)
+      this.imagewidth=img.width;
     img.onload = () => {
       const div = this.el.nativeElement.querySelector('div');
-      this.renderer.setStyle(div, 'width', `${img.width}px`);
-      this.renderer.setStyle(div, 'height', `${heigth}px`);
+
       this.renderer.setStyle(div, 'backgroundImage', `url('${this.imageUrl}')`);
-      this.renderer.setStyle(div, 'backgroundSize', 'contain');
+      this.renderer.setStyle(div, 'backgroundSize', 'cover');
       this.renderer.setStyle(div, 'backgroundRepeat', 'no-repeat');
       this.renderer.setStyle(div, 'backgroundPosition', 'center');
     };

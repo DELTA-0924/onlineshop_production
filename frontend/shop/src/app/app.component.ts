@@ -58,7 +58,7 @@ export class AppComponent implements OnInit{
       //  console.log(this.productList)
         this.search=true;        
         this.lastScrollPosition=0
-        this.threshold=-300
+        this.threshold=-150
         this.endOfList=false
         this.isLoading=false      
         if(!this.flag)  
@@ -83,7 +83,7 @@ export class AppComponent implements OnInit{
   }
    this.loading=true;
   }
-  threshold=-300;
+  threshold=-150;
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
      // Threshold in pixels before the end of the page
@@ -99,7 +99,7 @@ export class AppComponent implements OnInit{
    // console.log(this.endOfList )
 
     if (height - position <= this.threshold && !this.isLoading && !this.endOfList) {
-      this.threshold=this.threshold-150;
+      this.threshold=this.threshold-40;
 
       this.loadProducts();
       this.isLoading = true; // Set isLoading flag to true to prevent concurrent requests
@@ -113,7 +113,7 @@ export class AppComponent implements OnInit{
   }
   handlItemClick(item:string,index:number){
     this.lastScrollPosition=0;
-    this.threshold=-300
+    this.threshold=-150
     this.countpages=1;
     this.page=1;
     if(this.currentProductType==item)
@@ -211,23 +211,27 @@ export class AppComponent implements OnInit{
       //console.log("defulat loading") 
       this.page=2;
       this.isLoading=false
-      this.threshold=-300
+      this.threshold=-150
       this.flag=true
       return this.service.getByCategory(this.currentProductType,1,this.pageSize);
     }
-    this.threshold=-300
+    this.threshold=-150
     this.isLoading=false
     this.page=2;
+    this.flag=true
     return this.service.searchProducts(query,this.currentProductType,1,this.pageSize);
 
   }
-  
+  scrollPosition=0;
   receiveProductFromChild(product: Product) {
+    this.scrollPosition = window.scrollY;
+    window.scrollTo(0, 0)
     this.selectedProduct = product;
     this.selectProduct=true
     this.isLoading=true
   }
   receiveProductFromChild1(flag:boolean){
+    window.scrollTo(0,this.scrollPosition)
     this.selectProduct=false;
     this.isLoading=false
   }
