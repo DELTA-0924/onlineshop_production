@@ -34,8 +34,8 @@
       <div class="flex justify-center flex-wrap gap-1" >
         <p *ngIf="!loading">Загрузка...</p>
       </div>
-    </div>
-    <div class="flex justify-center mt-[125px] ">
+    </div>    
+    <div class="flex justify-center mt-[125px] h-[20vh] ">
     <app-product-detail  *ngIf="selectProduct" [product]="selectedProduct" (detailOutput)="receiveProductFromChild1($event)"></app-product-detail>
   </div>
 </div>

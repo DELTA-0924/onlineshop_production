@@ -11,13 +11,15 @@ import { ProductType } from './common/ProductType';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,CommonModule,FormsModule,HttpClientModule,ProductComponent,ProductDetailComponent,ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers:[ProductService]
+  providers:[ProductService],
+  
 })
 export class AppComponent implements OnInit{
   title = 'shop';
@@ -42,6 +44,8 @@ export class AppComponent implements OnInit{
   constructor(private service:ProductService){}
 
   ngOnInit(): void {
+    
+    this.lastScrollPosition=0
     this.currentProductType="Главная"    
       this.searchControl.valueChanges.pipe(
         debounceTime(300),
@@ -58,7 +62,7 @@ export class AppComponent implements OnInit{
       //  console.log(this.productList)
         this.search=true;        
         this.lastScrollPosition=0
-        this.threshold=-150
+        this.threshold=-100
         this.endOfList=false
         this.isLoading=false      
         if(!this.flag)  
@@ -83,27 +87,27 @@ export class AppComponent implements OnInit{
   }
    this.loading=true;
   }
-  threshold=-150;
+  threshold=-100;
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
      // Threshold in pixels before the end of the page
     const position = window.innerHeight + window.scrollY;
     const height = document.body.offsetHeight;
-    //console.log(height - position)
+  //  console.log(height - position)
     // Check if the user is scrolling down and approaching the bottom of the page
     if (window.scrollY < this.lastScrollPosition) {
  //     console.log("loadin to true ")
       this.isLoading = true; // Reset isLoading flag when scrolling up
     }
- //  console.log(this.isLoading )
-   // console.log(this.endOfList )
+  //  console.log(this.isLoading )
+  //   console.log(this.endOfList )
 
     if (height - position <= this.threshold && !this.isLoading && !this.endOfList) {
-      this.threshold=this.threshold-40;
+      this.threshold=this.threshold-50;
 
       this.loadProducts();
       this.isLoading = true; // Set isLoading flag to true to prevent concurrent requests
-    //  console.log("Loading more products...");
+     // console.log("Loading more products...");
     }
     
     // Additional check to prevent loading if the user scrolls back up to an area that was already loaded
@@ -113,7 +117,7 @@ export class AppComponent implements OnInit{
   }
   handlItemClick(item:string,index:number){
     this.lastScrollPosition=0;
-    this.threshold=-150
+    this.threshold=-100
     this.countpages=1;
     this.page=1;
     if(this.currentProductType==item)
@@ -205,20 +209,22 @@ export class AppComponent implements OnInit{
   flag:boolean=false;
   private InitsearchProducts(query: string) {
 
-    this.carrentquery=query
+    this.carrentquery=query    
+    this.isLoading=false
+    this.flag=true
+    this.page=2;
     if(this.carrentquery==''){
       this.search=false
-      //console.log("defulat loading") 
-      this.page=2;
-      this.isLoading=false
-      this.threshold=-150
-      this.flag=true
+      //console.log("defulat loading")       
+      
+      
+      
       return this.service.getByCategory(this.currentProductType,1,this.pageSize);
     }
-    this.threshold=-150
-    this.isLoading=false
-    this.page=2;
-    this.flag=true
+    
+    
+   
+    
     return this.service.searchProducts(query,this.currentProductType,1,this.pageSize);
 
   }

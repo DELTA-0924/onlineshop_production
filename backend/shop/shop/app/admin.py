@@ -6,6 +6,7 @@ from app.models import Product, ProductCategory
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('title', 'image_tag')
     search_fields = ('title',)
+    list_per_page = 10
 
     def get_search_results(self, request, queryset, search_term):
         queryset, use_distinct = super().get_search_results(request, queryset, search_term)
