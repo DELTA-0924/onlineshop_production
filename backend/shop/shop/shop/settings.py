@@ -12,23 +12,26 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import posixpath
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
-
+load_dotenv()
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '04bdb733-b320-4032-9ce3-c74d6dc19dc8'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG')=='True'
 
 
-ALLOWED_HOSTS = ["*"]
+
+
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 CORS_ORIGIN_ALLOW_ALL=True
-CSRF_TRUSTED_ORIGINS = ["http://localhost:4200","https://onlineshop.com"]
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(',')
 
 # Application references
 
@@ -106,13 +109,14 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'shop',
-        'USER':'postgres',
-        'PASSWORD':'tima12345',
-        'HOST': 'postgres', 
-        'PORT':'5432'
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -147,4 +151,4 @@ STATIC_ROOT =os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
 
 # URL ��� ������������ ����������� ������������
-MEDIA_URL = 'https://localhost:443/media/'
+MEDIA_URL = os.getenv('MEDIA_URL')

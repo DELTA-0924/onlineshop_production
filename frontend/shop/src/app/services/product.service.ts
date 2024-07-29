@@ -2,11 +2,12 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 import { Product } from '../common/Product';
+import { enviroments } from '../enviroments/enviroments';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private  url:string="/api"
+  private  url:string=enviroments.url;
   constructor(private http:HttpClient) { }
   get():Observable<any>{
     let limit=new HttpParams().append("limit",5);

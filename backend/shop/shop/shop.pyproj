@@ -50,6 +50,7 @@
     <Compile Include="shop\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".env" />
     <Content Include="app\templates\app\index.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
